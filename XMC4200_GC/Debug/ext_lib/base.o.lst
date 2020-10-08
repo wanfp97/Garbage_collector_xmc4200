@@ -1,0 +1,211 @@
+   1              	 .syntax unified
+   2              	 .cpu cortex-m4
+   3              	 .eabi_attribute 27,3
+   4              	 .fpu fpv4-sp-d16
+   5              	 .eabi_attribute 20,1
+   6              	 .eabi_attribute 21,1
+   7              	 .eabi_attribute 23,3
+   8              	 .eabi_attribute 24,1
+   9              	 .eabi_attribute 25,1
+  10              	 .eabi_attribute 26,1
+  11              	 .eabi_attribute 30,6
+  12              	 .eabi_attribute 34,1
+  13              	 .eabi_attribute 18,4
+  14              	 .thumb
+  15              	 .file "base.c"
+  16              	 .text
+  17              	.Ltext0:
+  18              	 .cfi_sections .debug_frame
+  19              	 .section .text.TLE94112EL_SetHBRegdata,"ax",%progbits
+  20              	 .align 2
+  21              	 .global TLE94112EL_SetHBRegdata
+  22              	 .thumb
+  23              	 .thumb_func
+  25              	TLE94112EL_SetHBRegdata:
+  26              	.LFB0:
+  27              	 .file 1 "../ext_lib/base.c"
+   1:../ext_lib/base.c **** #include "base.h"
+   2:../ext_lib/base.c **** 
+   3:../ext_lib/base.c **** void TLE94112EL_SetHBRegdata(const TLE94112EL_t *const handler, uint8_t TLE94112EL_HB_ACT_X_CTRL, u
+   4:../ext_lib/base.c **** {
+  28              	 .loc 1 4 0
+  29              	 .cfi_startproc
+  30              	 
+  31              	 
+  32 0000 80B5     	 push {r7,lr}
+  33              	.LCFI0:
+  34              	 .cfi_def_cfa_offset 8
+  35              	 .cfi_offset 7,-8
+  36              	 .cfi_offset 14,-4
+  37 0002 84B0     	 sub sp,sp,#16
+  38              	.LCFI1:
+  39              	 .cfi_def_cfa_offset 24
+  40 0004 00AF     	 add r7,sp,#0
+  41              	.LCFI2:
+  42              	 .cfi_def_cfa_register 7
+  43 0006 7860     	 str r0,[r7,#4]
+  44 0008 0B46     	 mov r3,r1
+  45 000a FB70     	 strb r3,[r7,#3]
+  46 000c 1346     	 mov r3,r2
+  47 000e BB70     	 strb r3,[r7,#2]
+   5:../ext_lib/base.c ****   uint8_t tx_data[2];
+   6:../ext_lib/base.c ****   uint8_t rx_data[2];
+   7:../ext_lib/base.c ****   uint8_t addr;
+   8:../ext_lib/base.c **** 
+   9:../ext_lib/base.c **** 	switch(TLE94112EL_HB_ACT_X_CTRL){
+  48              	 .loc 1 9 0
+  49 0010 FB78     	 ldrb r3,[r7,#3]
+  50 0012 022B     	 cmp r3,#2
+  51 0014 06D0     	 beq .L3
+  52 0016 032B     	 cmp r3,#3
+  53 0018 07D0     	 beq .L4
+  54 001a 012B     	 cmp r3,#1
+  55 001c 08D1     	 bne .L2
+  10:../ext_lib/base.c **** 
+  11:../ext_lib/base.c **** 		case 1:
+  12:../ext_lib/base.c **** 			addr = TLE94112EL_HB_ACT_1_CTRL;
+  56              	 .loc 1 12 0
+  57 001e 0323     	 movs r3,#3
+  58 0020 FB73     	 strb r3,[r7,#15]
+  13:../ext_lib/base.c **** 			break;
+  59              	 .loc 1 13 0
+  60 0022 05E0     	 b .L2
+  61              	.L3:
+  14:../ext_lib/base.c **** 
+  15:../ext_lib/base.c **** 		case 2:
+  16:../ext_lib/base.c **** 			addr = TLE94112EL_HB_ACT_2_CTRL;
+  62              	 .loc 1 16 0
+  63 0024 4323     	 movs r3,#67
+  64 0026 FB73     	 strb r3,[r7,#15]
+  17:../ext_lib/base.c **** 			break;
+  65              	 .loc 1 17 0
+  66 0028 02E0     	 b .L2
+  67              	.L4:
+  18:../ext_lib/base.c **** 
+  19:../ext_lib/base.c **** 		case 3:
+  20:../ext_lib/base.c **** 			addr = TLE94112EL_HB_ACT_3_CTRL;
+  68              	 .loc 1 20 0
+  69 002a 2323     	 movs r3,#35
+  70 002c FB73     	 strb r3,[r7,#15]
+  21:../ext_lib/base.c **** 			break;
+  71              	 .loc 1 21 0
+  72 002e 00BF     	 nop
+  73              	.L2:
+  22:../ext_lib/base.c **** 
+  23:../ext_lib/base.c **** 	}
+  24:../ext_lib/base.c **** 
+  25:../ext_lib/base.c **** 	  //write
+  26:../ext_lib/base.c **** 	  tx_data[0] = addr | 0x80;
+  74              	 .loc 1 26 0
+  75 0030 FB7B     	 ldrb r3,[r7,#15]
+  76 0032 63F07F03 	 orn r3,r3,#127
+  77 0036 DBB2     	 uxtb r3,r3
+  78 0038 3B73     	 strb r3,[r7,#12]
+  27:../ext_lib/base.c **** 	  tx_data[1] = regdata;
+  79              	 .loc 1 27 0
+  80 003a BB78     	 ldrb r3,[r7,#2]
+  81 003c 7B73     	 strb r3,[r7,#13]
+  28:../ext_lib/base.c **** 	  handler->spi_transfer(tx_data, rx_data);
+  82              	 .loc 1 28 0
+  83 003e 7B68     	 ldr r3,[r7,#4]
+  84 0040 9B68     	 ldr r3,[r3,#8]
+  85 0042 07F10C01 	 add r1,r7,#12
+  86 0046 07F10802 	 add r2,r7,#8
+  87 004a 0846     	 mov r0,r1
+  88 004c 1146     	 mov r1,r2
+  89 004e 9847     	 blx r3
+  29:../ext_lib/base.c **** }
+  90              	 .loc 1 29 0
+  91 0050 1037     	 adds r7,r7,#16
+  92              	.LCFI3:
+  93              	 .cfi_def_cfa_offset 8
+  94 0052 BD46     	 mov sp,r7
+  95              	.LCFI4:
+  96              	 .cfi_def_cfa_register 13
+  97              	 
+  98 0054 80BD     	 pop {r7,pc}
+  99              	 .cfi_endproc
+ 100              	.LFE0:
+ 102 0056 00BF     	 .section .text.TLE94112EL_SetRegdata,"ax",%progbits
+ 103              	 .align 2
+ 104              	 .global TLE94112EL_SetRegdata
+ 105              	 .thumb
+ 106              	 .thumb_func
+ 108              	TLE94112EL_SetRegdata:
+ 109              	.LFB1:
+  30:../ext_lib/base.c **** 
+  31:../ext_lib/base.c **** void TLE94112EL_SetRegdata(const TLE94112EL_t *const handler, uint8_t TLE_REG, uint8_t regdata)
+  32:../ext_lib/base.c **** {
+ 110              	 .loc 1 32 0
+ 111              	 .cfi_startproc
+ 112              	 
+ 113              	 
+ 114 0000 80B5     	 push {r7,lr}
+ 115              	.LCFI5:
+ 116              	 .cfi_def_cfa_offset 8
+ 117              	 .cfi_offset 7,-8
+ 118              	 .cfi_offset 14,-4
+ 119 0002 84B0     	 sub sp,sp,#16
+ 120              	.LCFI6:
+ 121              	 .cfi_def_cfa_offset 24
+ 122 0004 00AF     	 add r7,sp,#0
+ 123              	.LCFI7:
+ 124              	 .cfi_def_cfa_register 7
+ 125 0006 7860     	 str r0,[r7,#4]
+ 126 0008 0B46     	 mov r3,r1
+ 127 000a FB70     	 strb r3,[r7,#3]
+ 128 000c 1346     	 mov r3,r2
+ 129 000e BB70     	 strb r3,[r7,#2]
+  33:../ext_lib/base.c **** 	  uint8_t tx_data[2];
+  34:../ext_lib/base.c **** 	  uint8_t rx_data[2];
+  35:../ext_lib/base.c **** 	  uint8_t addr = TLE_REG;
+ 130              	 .loc 1 35 0
+ 131 0010 FB78     	 ldrb r3,[r7,#3]
+ 132 0012 FB73     	 strb r3,[r7,#15]
+  36:../ext_lib/base.c **** 
+  37:../ext_lib/base.c **** 	  //write
+  38:../ext_lib/base.c **** 	  tx_data[0] = addr | 0x80;
+ 133              	 .loc 1 38 0
+ 134 0014 FB7B     	 ldrb r3,[r7,#15]
+ 135 0016 63F07F03 	 orn r3,r3,#127
+ 136 001a DBB2     	 uxtb r3,r3
+ 137 001c 3B73     	 strb r3,[r7,#12]
+  39:../ext_lib/base.c **** 	  tx_data[1] = regdata;
+ 138              	 .loc 1 39 0
+ 139 001e BB78     	 ldrb r3,[r7,#2]
+ 140 0020 7B73     	 strb r3,[r7,#13]
+  40:../ext_lib/base.c **** 	  handler->spi_transfer(tx_data, rx_data);
+ 141              	 .loc 1 40 0
+ 142 0022 7B68     	 ldr r3,[r7,#4]
+ 143 0024 9B68     	 ldr r3,[r3,#8]
+ 144 0026 07F10C01 	 add r1,r7,#12
+ 145 002a 07F10802 	 add r2,r7,#8
+ 146 002e 0846     	 mov r0,r1
+ 147 0030 1146     	 mov r1,r2
+ 148 0032 9847     	 blx r3
+  41:../ext_lib/base.c **** }
+ 149              	 .loc 1 41 0
+ 150 0034 1037     	 adds r7,r7,#16
+ 151              	.LCFI8:
+ 152              	 .cfi_def_cfa_offset 8
+ 153 0036 BD46     	 mov sp,r7
+ 154              	.LCFI9:
+ 155              	 .cfi_def_cfa_register 13
+ 156              	 
+ 157 0038 80BD     	 pop {r7,pc}
+ 158              	 .cfi_endproc
+ 159              	.LFE1:
+ 161 003a 00BF     	 .text
+ 162              	.Letext0:
+ 163              	 .file 2 "c:\\users\\forge-15r\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 164              	 .file 3 "c:\\users\\forge-15r\\dave-ide-4.4.2-64bit\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\stdint.h"
+ 165              	 .file 4 "../ext_lib/tle94112el.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 base.c
+    {standard input}:20     .text.TLE94112EL_SetHBRegdata:00000000 $t
+    {standard input}:25     .text.TLE94112EL_SetHBRegdata:00000000 TLE94112EL_SetHBRegdata
+    {standard input}:103    .text.TLE94112EL_SetRegdata:00000000 $t
+    {standard input}:108    .text.TLE94112EL_SetRegdata:00000000 TLE94112EL_SetRegdata
+                     .debug_frame:00000010 $d
+
+NO UNDEFINED SYMBOLS
